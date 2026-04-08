@@ -1,20 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Romantic Website</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <title>💕 Momentos Românticos 💕</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #ff1493; --secondary: #ff69b4; --text: #d63384; }
+        html, body { width: 100%; height: 100%; overflow: hidden; }
+        body { background: linear-gradient(135deg, #fff5f7, #ffe5ec, #fff0f5);
+                display: flex; justify-content: center; align-items: center;
+                font-family: 'Segoe UI', sans-serif; position: relative; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+        @keyframes pulse { 0%, 100% { box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3); }
+                          50% { box-shadow: 0 15px 50px rgba(255, 20, 147, 0.6); } }
+        .container { display: flex; flex-direction: column; justify-content: center;
+                      align-items: center; gap: 40px; z-index: 10;
+                      position: relative; text-align: center; padding: 20px; }
+        .title { font-size: 56px; color: var(--primary); font-weight: 700;
+                 letter-spacing: 3px; animation: fadeIn 0.8s ease-out;
+                 background: linear-gradient(135deg, var(--primary), var(--secondary));
+                 -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { font-size: 18px; color: var(--text); font-style: italic;
+                     animation: fadeIn 1s ease-out; }
+        button { background: linear-gradient(135deg, var(--secondary), var(--primary));
+                 color: white; border: none; padding: 22px 60px; font-size: 26px;
+                 font-weight: 800; border-radius: 60px; cursor: pointer; }
+                     box-shadow: 0 10px 40px rgba(255, 20, 147, 0.4); transition: all 0.4s ease;
+                     text-transform: uppercase; letter-spacing: 3px; animation: pulse 2s infinite; }
+        button:hover { transform: translateY(-5px) scale(1.05);
+                        box-shadow: 0 20px 60px rgba(255, 20, 147, 0.6); }
+        .romantic-text { font-size: 32px; color: var(--text); font-style: italic;
+                         max-width: 700px; line-height: 1.8; cursor: pointer;
+                         padding: 30px 40px; border-radius: 20px;
+                         background: rgba(255, 255, 255, 0.3);
+                         border: 2px solid transparent; transition: all 0.3s ease;
+                         opacity: 0; transform: translateY(30px); }
+        .romantic-text.show { opacity: 1; transform: translateY(0);
+                               animation: fadeIn 0.6s ease forwards; }
+        .romantic-text:hover { background: rgba(255, 192, 203, 0.5);
+                               transform: scale(1.03); border-color: var(--primary); }
+        .romantic-text.editing { background: rgba(255, 192, 203, 0.7);
+                                  border: 3px solid var(--primary);
+                                  box-shadow: 0 0 20px rgba(255, 20, 147, 0.5); }
+        .heart-emoji { position: fixed; font-size: 35px; pointer-events: none;
+                        animation: fall linear forwards; z-index: 5; }
+        @media (max-width: 768px) { .title { font-size: 36px; }
+                                       button { padding: 16px 40px; font-size: 18px; }
+                                       .romantic-text { font-size: 20px; } }
+        @media (max-width: 480px) { .title { font-size: 28px; }
+                                       button { padding: 14px 32px; font-size: 16px; }
+                                       .romantic-text { font-size: 16px; } }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1 id="editable-title">Welcome to the Romantic Site!</h1>
-        <p id="editable-description">This is where love blossoms with every click.</p>
-        <input type="text" id="title-input" placeholder="Edit title" />
-        <input type="text" id="description-input" placeholder="Edit description" />
-        <button id="update-button">Update Text</button>
+        <div class="title">💕 Momentos Românticos 💕</div>
+        <div class="subtitle">Clique no botão e deixe a magia acontecer...</div>
+        <button id="clickButton">Clique-me</button>
+        <div class="romantic-text" id="romanticText"></div>
     </div>
-    <div class="heart-rain"></div>
+    <script>
+        const messages = [
+            "Você é minha pessoa favorita do universo inteiro 💕",
+            "Cada momento ao seu lado é um presente do céu 🌹",
+            "Você faz meu coração bater de forma especial ❤️",
+            "Com voc��, descobri o verdadeiro significado do amor 💫",
+            "Você é a razão do meu sorriso todos os dias 😊💕",
+            "Sua presença ilumina meus dias mais sombrios ✨",
+            "Amo tudo em você, cada detalhe é perfeito 💖",
+            "Você é meu melhor presente 🎁",
+            "Meu coração é inteiramente seu 💗"
+        ];
+        const btn = document.getElementById('clickButton');
+        const text = document.getElementById('romanticText');
+        let isAnimating = false;
+        let isEditing = false;
+        function createHearts() {
+            if (isAnimating) return;
+            isAnimating = true;
+            const msg = messages[Math.floor(Math.random() * messages.length)];
+            text.textContent = msg;
+            text.classList.add('show');
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart-emoji';
+                    heart.textContent = ['❤️', '💕', '💖', '💗', '💓'][Math.floor(Math.random() * 5)];
+                    const x = Math.random() * window.innerWidth;
+                    const duration = 2.5 + Math.random() * 1.5;
+                    heart.style.left = x + 'px';
+                    heart.style.top = '-80px';
+                    heart.style.animationDuration = duration + 's';
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), duration * 1000 + 200);
+                }, i * 50);
+            }
+            if (navigator.vibrate) navigator.vibrate([20, 30, 20]);
+            setTimeout(() => { isAnimating = false; }, 4000);
+        }
+        function editText() {
+            if (isEditing || !text.classList.contains('show')) return;
+            isEditing = true;
+            text.classList.add('editing');
+            text.contentEditable = true;
+            text.focus();
+            const range = document.createRange();
+            range.selectNodeContents(text);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            function finish() {
+                text.contentEditable = false;
+                text.classList.remove('editing');
+                isEditing = false;
+            }
+            text.addEventListener('blur', finish, { once: true });
+            text.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    finish();
+                }
+            }, { once: true });
+        }
+        btn.addEventListener('click', createHearts);
+        text.addEventListener('click', editText);
+        text.addEventListener('dblclick', editText);
+    </script>
 </body>
 </html>

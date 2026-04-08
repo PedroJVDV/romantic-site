@@ -9,14 +9,13 @@
       --bg1: #1a0008;
       --bg2: #2a0010;
       --bg3: #3a0015;
-      --red-glow: #ff2b2b;
-      --red-bright: #ff3d3d;
-      --red-soft: #ff6a6a;
+      --red-main: #ff3c3c;
+      --red-soft: #ff6161;
       --card: rgba(60, 0, 20, 0.55);
-      --card-border: rgba(255, 45, 45, 0.75);
-      --text-main: #ff3d3d;
-      --text-sub: #ff6f6f;
-      --white-soft: #ffdede;
+      --card-border: rgba(255, 45, 45, 0.65);
+      --text-main: #ff4a4a;
+      --text-sub: #ff7a7a;
+      --text-soft: #ffdede;
     }
 
     * {
@@ -30,9 +29,10 @@
       width: 100%;
       min-height: 100%;
       overflow-x: hidden;
-      background: radial-gradient(circle at 20% 20%, #450018 0%, transparent 35%),
-                  radial-gradient(circle at 80% 80%, #3a0012 0%, transparent 35%),
-                  linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      background:
+        radial-gradient(circle at 20% 20%, #450018 0%, transparent 35%),
+        radial-gradient(circle at 80% 80%, #3a0012 0%, transparent 35%),
+        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
       color: var(--text-main);
     }
 
@@ -50,12 +50,10 @@
       z-index: 2;
     }
 
-    /* HEADER */
     .header {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      border-bottom: 1px solid rgba(255, 50, 50, 0.35);
+      border-bottom: 1px solid rgba(255, 50, 50, 0.3);
       padding-bottom: 18px;
       margin-bottom: 48px;
     }
@@ -66,50 +64,47 @@
       gap: 12px;
       font-size: clamp(24px, 3vw, 40px);
       font-weight: 800;
+      color: var(--red-main);
       letter-spacing: 0.5px;
-      color: var(--red-bright);
-      text-shadow: 0 0 10px rgba(255, 40, 40, 0.65),
-                   0 0 22px rgba(255, 20, 20, 0.35);
+      /* brilho mais fraco */
+      text-shadow: 0 0 4px rgba(255, 45, 45, 0.35);
     }
 
     .brand .emoji {
       font-size: 1.05em;
-      filter: drop-shadow(0 0 8px rgba(255, 70, 70, 0.75));
       animation: pulseHeart 1.8s infinite ease-in-out;
+      filter: drop-shadow(0 0 4px rgba(255, 70, 70, 0.4));
     }
 
     @keyframes pulseHeart {
-      0%,100% { transform: scale(1); }
-      50% { transform: scale(1.12); }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
     }
 
-    /* HERO */
     .hero {
       text-align: center;
       margin-bottom: 34px;
     }
 
     .hero h1 {
-      font-size: clamp(36px, 7vw, 86px);
+      font-size: clamp(36px, 7vw, 82px);
       line-height: 1.08;
       font-weight: 900;
-      color: var(--red-bright);
-      text-shadow:
-        0 0 18px rgba(255, 45, 45, 0.8),
-        0 0 38px rgba(255, 20, 20, 0.45);
+      color: var(--red-main);
+      /* brilho mais fraco */
+      text-shadow: 0 0 6px rgba(255, 45, 45, 0.35);
       margin-bottom: 18px;
     }
 
     .hero p {
-      font-size: clamp(16px, 2.1vw, 28px);
+      font-size: clamp(16px, 2.1vw, 27px);
       color: var(--text-sub);
       font-style: italic;
       max-width: 980px;
       margin: 0 auto;
-      text-shadow: 0 0 10px rgba(255, 40, 40, 0.28);
+      text-shadow: 0 0 4px rgba(255, 40, 40, 0.18);
     }
 
-    /* CONTROLS */
     .controls {
       display: flex;
       justify-content: center;
@@ -128,25 +123,21 @@
       color: #fff;
       background: linear-gradient(135deg, #cf002e, #ff2d2d);
       box-shadow:
-        0 0 18px rgba(255, 45, 45, 0.85),
-        0 12px 30px rgba(0, 0, 0, 0.45);
+        0 0 10px rgba(255, 45, 45, 0.45),
+        0 10px 24px rgba(0, 0, 0, 0.45);
       transition: transform .18s ease, box-shadow .25s ease, filter .2s;
       text-transform: uppercase;
     }
 
     .btn-main:hover {
-      transform: translateY(-2px) scale(1.03);
+      transform: translateY(-2px) scale(1.02);
       box-shadow:
-        0 0 26px rgba(255, 50, 50, 1),
-        0 14px 35px rgba(0, 0, 0, 0.55);
-      filter: brightness(1.05);
+        0 0 14px rgba(255, 50, 50, 0.55),
+        0 12px 28px rgba(0, 0, 0, 0.55);
     }
 
-    .btn-main:active {
-      transform: scale(0.985);
-    }
+    .btn-main:active { transform: scale(0.985); }
 
-    /* MESSAGE SCREEN (substitui chat) */
     .screen-wrap {
       display: flex;
       justify-content: center;
@@ -156,58 +147,26 @@
       width: min(100%, 980px);
       min-height: 180px;
       border-radius: 22px;
-      padding: 28px 26px;
+      padding: 24px 24px;
       background: linear-gradient(145deg, rgba(70,0,20,0.62), rgba(40,0,14,0.62));
       border: 2px solid var(--card-border);
       box-shadow:
-        inset 0 0 28px rgba(255, 35, 35, 0.14),
-        0 12px 38px rgba(0, 0, 0, 0.5),
-        0 0 24px rgba(255, 40, 40, 0.25);
+        inset 0 0 20px rgba(255, 35, 35, 0.08),
+        0 12px 32px rgba(0, 0, 0, 0.45);
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      backdrop-filter: blur(8px);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .message-screen::before {
-      content: "";
-      position: absolute;
-      top: -140%;
-      left: -60%;
-      width: 55%;
-      height: 350%;
-      background: linear-gradient(120deg, transparent, rgba(255,80,80,.2), transparent);
-      transform: rotate(20deg);
-      animation: shine 5s linear infinite;
-      pointer-events: none;
-    }
-
-    @keyframes shine {
-      from { transform: translateX(-120%) rotate(20deg); }
-      to { transform: translateX(380%) rotate(20deg); }
-    }
-
-    .screen-label {
-      font-size: 13px;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: var(--white-soft);
-      opacity: .78;
-      margin-bottom: 10px;
+      justify-content: center;
+      backdrop-filter: blur(7px);
     }
 
     .screen-message {
-      font-size: clamp(22px, 3.2vw, 36px);
+      font-size: clamp(21px, 3vw, 34px);
       text-align: center;
-      line-height: 1.45;
+      line-height: 1.5;
       font-weight: 700;
-      color: var(--red-bright);
-      text-shadow:
-        0 0 10px rgba(255, 45, 45, 0.58),
-        0 0 24px rgba(255, 30, 30, 0.32);
+      color: var(--red-main);
+      /* brilho mais fraco */
+      text-shadow: 0 0 4px rgba(255, 45, 45, 0.24);
       padding: 4px 8px;
       animation: msgIn .35s ease;
     }
@@ -217,19 +176,69 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* FOOTER / WATERMARK */
     .footer {
       margin-top: 44px;
-      border-top: 1px solid rgba(255, 45, 45, 0.28);
+      border-top: 1px solid rgba(255, 45, 45, 0.22);
       padding-top: 18px;
       text-align: center;
       color: var(--red-soft);
       font-size: clamp(14px, 1.7vw, 18px);
-      text-shadow: 0 0 8px rgba(255, 40, 40, 0.25);
+      text-shadow: 0 0 3px rgba(255, 40, 40, 0.18);
       opacity: 0.9;
     }
 
-    /* HEART RAIN */
+    /* popup de poesias */
+    .poetry-popup {
+      position: fixed;
+      right: 20px;
+      top: 100px;
+      width: min(320px, 86vw);
+      min-height: 170px;
+      background: rgba(28, 0, 10, 0.92);
+      border: 1px solid rgba(255, 70, 70, 0.55);
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+      padding: 14px 14px 12px;
+      z-index: 5;
+      backdrop-filter: blur(8px);
+    }
+
+    .poetry-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 70, 70, 0.22);
+      padding-bottom: 6px;
+      color: var(--text-soft);
+      font-size: 13px;
+      letter-spacing: .5px;
+    }
+
+    .poetry-title {
+      font-weight: 700;
+      color: var(--red-soft);
+      text-shadow: 0 0 3px rgba(255, 70, 70, 0.15);
+    }
+
+    .poetry-body {
+      color: #ffd3d3;
+      font-size: 14.3px;
+      line-height: 1.55;
+      min-height: 92px;
+      display: flex;
+      align-items: center;
+      white-space: pre-line;
+    }
+
+    .poetry-author {
+      margin-top: 8px;
+      text-align: right;
+      color: #ff9a9a;
+      font-size: 12.5px;
+      opacity: .92;
+    }
+
     .hearts-layer {
       position: fixed;
       inset: 0;
@@ -242,10 +251,9 @@
       position: absolute;
       top: -10vh;
       font-size: 30px;
-      will-change: transform, opacity;
       animation: fall linear forwards;
-      filter: drop-shadow(0 0 8px rgba(255, 55, 55, 0.75));
-      opacity: 0.96;
+      filter: drop-shadow(0 0 6px rgba(255, 55, 55, 0.45));
+      opacity: 0.94;
     }
 
     @keyframes fall {
@@ -255,27 +263,34 @@
       }
     }
 
+    @media (max-width: 850px) {
+      .poetry-popup {
+        position: static;
+        margin: 18px auto 0;
+      }
+    }
+
     @media (max-width: 700px) {
-      .header {
-        margin-bottom: 30px;
-      }
-
-      .message-screen {
-        min-height: 150px;
-        padding: 20px 15px;
-      }
-
-      .footer {
-        margin-top: 30px;
-      }
+      .header { margin-bottom: 30px; }
+      .message-screen { min-height: 150px; padding: 20px 15px; }
+      .footer { margin-top: 30px; }
     }
   </style>
 </head>
 <body>
   <div class="hearts-layer" id="heartsLayer"></div>
 
+  <!-- popup separado em outro canto -->
+  <aside class="poetry-popup" id="poetryPopup">
+    <div class="poetry-head">
+      <span class="poetry-title">poesia romântica</span>
+      <span>atualiza em 1 min</span>
+    </div>
+    <div class="poetry-body" id="poetryText"></div>
+    <div class="poetry-author" id="poetryAuthor"></div>
+  </aside>
+
   <div class="wrapper">
-    <!-- HEADER sem menu -->
     <header class="header">
       <div class="brand">
         <span class="emoji">💕</span>
@@ -283,20 +298,18 @@
       </div>
     </header>
 
-    <!-- ASTRO PRINCIPAL -->
     <section class="hero">
       <h1>cada clique é algo diferente...</h1>
-      <p>você é muito mais do que pensa, e transmite muito mais do que acha, definitivamente uma mulherzinha incrível :) ui ui ui </p>
+      <p>você é muito mais do que pensa, e transmite muito mais do que acha, definitivamente uma mulherzinha incrível :) ui ui ui</p>
 
       <div class="controls">
-        <button id="btnClique" class="btn-main">Clique-me 💕</button>
+        <button id="btnClique" class="btn-main">Clique-me</button>
       </div>
 
-      <!-- telinha de mensagens -->
       <div class="screen-wrap">
         <div class="message-screen" aria-live="polite">
-          <div class="screen-label">mensagens passando</div>
-          <div class="screen-message" id="screenMessage">Você é simplesmente incrível ❤️</div>
+          <!-- título removido -->
+          <div class="screen-message" id="screenMessage">você ilumina o ambiente sem perceber</div>
         </div>
       </div>
     </section>
@@ -305,63 +318,87 @@
   </div>
 
   <script>
+    // mensagens estilo solicitado (sem emoji)
     const messages = [
-      "Você é simplesmente incrível ❤️",
-      "Seu brilho é raro, de verdade ✨",
-      "Tem algo em você que acalma e encanta",
-      "Você é mais especial do que imagina 💫",
-      "Seu jeito é bonito por dentro e por fora",
-      "Você transmite uma energia muito boa 🌹",
-      "Você merece tudo o que é lindo 💖",
-      "Sua presença faz diferença sim",
-      "Você é uma mulherzinha incrível :)",
-      "Continua sendo essa pessoa maravilhosa 💕"
+      "você é muito mais do que pensa",
+      "você transmite muito mais do que acha",
+      "definitivamente uma mulherzinha incrível",
+      "seu jeito é leve, bonito e raro",
+      "tem uma força doce em você",
+      "você tem presença, mesmo em silêncio",
+      "você marca os detalhes sem forçar nada",
+      "você tem um encanto próprio",
+      "você tem uma beleza que não é comum",
+      "há algo em você que acalma",
+      "seu olhar diz mais do que mil frases",
+      "você é simples e ao mesmo tempo inesquecível"
+    ];
+
+    // poesias curtas / trechos inspirados em românticos relevantes (paráfrases)
+    const poetry = [
+      { text: "Amar é encontrar no outro a melhor parte de si e cuidar dela com delicadeza.", author: "inspiração em Vinicius de Moraes" },
+      { text: "O amor transforma o cotidiano em algo extraordinário, mesmo nos dias mais comuns.", author: "inspiração em Pablo Neruda" },
+      { text: "Quem ama de verdade aprende a enxergar beleza onde antes havia pressa.", author: "inspiração em Florbela Espanca" },
+      { text: "No amor, o essencial não é dizer muito, mas permanecer inteiro.", author: "inspiração em Clarice Lispector" },
+      { text: "A ternura é a linguagem mais alta de duas pessoas que se escolhem.", author: "inspiração em Cecília Meireles" },
+      { text: "O coração reconhece aquilo que a razão demora para entender.", author: "inspiração em Fernando Pessoa" }
     ];
 
     let messageIndex = 0;
+    let poetryIndex = 0;
+
     const screenMessage = document.getElementById("screenMessage");
     const btnClique = document.getElementById("btnClique");
     const heartsLayer = document.getElementById("heartsLayer");
 
+    const poetryText = document.getElementById("poetryText");
+    const poetryAuthor = document.getElementById("poetryAuthor");
+
     function nextMessage() {
       messageIndex = (messageIndex + 1) % messages.length;
       screenMessage.style.animation = "none";
-      void screenMessage.offsetWidth; // restart animation
+      void screenMessage.offsetWidth;
       screenMessage.textContent = messages[messageIndex];
       screenMessage.style.animation = "msgIn .35s ease";
     }
 
-    function rainHearts(count = 60) {
-      const hearts = ["❤️", "💖", "💕", "💘", "💗"];
+    function nextPoetry() {
+      poetryIndex = (poetryIndex + 1) % poetry.length;
+      poetryText.textContent = poetry[poetryIndex].text;
+      poetryAuthor.textContent = poetry[poetryIndex].author;
+    }
+
+    function rainHearts(count = 56) {
+      const hearts = ["❤", "♥", "♡"];
       for (let i = 0; i < count; i++) {
         setTimeout(() => {
           const h = document.createElement("span");
           h.className = "heart";
           h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
           h.style.left = Math.random() * 100 + "vw";
-          h.style.fontSize = (18 + Math.random() * 28) + "px";
-          h.style.animationDuration = (2.5 + Math.random() * 2.5) + "s";
+          h.style.fontSize = (18 + Math.random() * 24) + "px";
+          h.style.animationDuration = (2.5 + Math.random() * 2.3) + "s";
           heartsLayer.appendChild(h);
-
-          setTimeout(() => h.remove(), 5500);
-        }, i * 38);
+          setTimeout(() => h.remove(), 5400);
+        }, i * 35);
       }
     }
 
-    // clique muda mensagem e faz chuva
     btnClique.addEventListener("click", () => {
       nextMessage();
-      rainHearts(70);
-
-      if (navigator.vibrate) {
-        navigator.vibrate([18, 25, 18]);
-      }
+      rainHearts(60);
+      if (navigator.vibrate) navigator.vibrate([15, 25, 15]);
     });
 
-    // telinha passando automaticamente
-    setInterval(() => {
-      nextMessage();
-    }, 4500);
+    // troca automática da "telinha"
+    setInterval(nextMessage, 4200);
+
+    // popup com poesia: 1 em 1 minuto
+    setInterval(nextPoetry, 60000);
+
+    // inicial
+    poetryText.textContent = poetry[0].text;
+    poetryAuthor.textContent = poetry[0].author;
   </script>
 </body>
 </html>

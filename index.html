@@ -3,130 +3,1233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💕 Momentos Românticos 💕</title>
+    <meta name="description" content="Momentos Românticos - Site luxuoso e romântico com tema escuro">
+    <meta name="theme-color" content="#1a0a0f">
+    <title>💕 Momentos Românticos - Luxo e Romance 💕</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --primary: #ff1493; --secondary: #ff69b4; --text: #d63384; }
-        html, body { width: 100%; height: 100%; overflow: hidden; }
-        body { background: linear-gradient(135deg, #fff5f7, #ffe5ec, #fff0f5);
-                display: flex; justify-content: center; align-items: center;
-                font-family: 'Segoe UI', sans-serif; position: relative; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
-        @keyframes pulse { 0%, 100% { box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3); }
-                          50% { box-shadow: 0 15px 50px rgba(255, 20, 147, 0.6); } }
-        .container { display: flex; flex-direction: column; justify-content: center;
-                      align-items: center; gap: 40px; z-index: 10;
-                      position: relative; text-align: center; padding: 20px; }
-        .title { font-size: 56px; color: var(--primary); font-weight: 700;
-                 letter-spacing: 3px; animation: fadeIn 0.8s ease-out;
-                 background: linear-gradient(135deg, var(--primary), var(--secondary));
-                 -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .subtitle { font-size: 18px; color: var(--text); font-style: italic;
-                     animation: fadeIn 1s ease-out; }
-        button { background: linear-gradient(135deg, var(--secondary), var(--primary));
-                 color: white; border: none; padding: 22px 60px; font-size: 26px;
-                 font-weight: 800; border-radius: 60px; cursor: pointer; }
-                     box-shadow: 0 10px 40px rgba(255, 20, 147, 0.4); transition: all 0.4s ease;
-                     text-transform: uppercase; letter-spacing: 3px; animation: pulse 2s infinite; }
-        button:hover { transform: translateY(-5px) scale(1.05);
-                        box-shadow: 0 20px 60px rgba(255, 20, 147, 0.6); }
-        .romantic-text { font-size: 32px; color: var(--text); font-style: italic;
-                         max-width: 700px; line-height: 1.8; cursor: pointer;
-                         padding: 30px 40px; border-radius: 20px;
-                         background: rgba(255, 255, 255, 0.3);
-                         border: 2px solid transparent; transition: all 0.3s ease;
-                         opacity: 0; transform: translateY(30px); }
-        .romantic-text.show { opacity: 1; transform: translateY(0);
-                               animation: fadeIn 0.6s ease forwards; }
-        .romantic-text:hover { background: rgba(255, 192, 203, 0.5);
-                               transform: scale(1.03); border-color: var(--primary); }
-        .romantic-text.editing { background: rgba(255, 192, 203, 0.7);
-                                  border: 3px solid var(--primary);
-                                  box-shadow: 0 0 20px rgba(255, 20, 147, 0.5); }
-        .heart-emoji { position: fixed; font-size: 35px; pointer-events: none;
-                        animation: fall linear forwards; z-index: 5; }
-        @media (max-width: 768px) { .title { font-size: 36px; }
-                                       button { padding: 16px 40px; font-size: 18px; }
-                                       .romantic-text { font-size: 20px; } }
-        @media (max-width: 480px) { .title { font-size: 28px; }
-                                       button { padding: 14px 32px; font-size: 16px; }
-                                       .romantic-text { font-size: 16px; } }
+        /* ==================== RESET ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        button, input, textarea, select {
+            font-family: inherit;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul, ol {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ==================== CSS VARIABLES ==================== */
+        :root {
+            --primary-dark: #1a0a0f;
+            --primary-mid: #2d1115;
+            --primary-light: #3d1520;
+            --accent-red: #c41e3a;
+            --accent-red-bright: #e63946;
+            --accent-red-light: #ff6b6b;
+            --gold: #d4af37;
+            --text-light: #f5f5f5;
+            --text-gray: #b0b0b0;
+            --spacing-xs: 5px;
+            --spacing-sm: 10px;
+            --spacing-md: 15px;
+            --spacing-lg: 20px;
+            --spacing-xl: 30px;
+            --spacing-2xl: 40px;
+            --spacing-3xl: 60px;
+            --transition: all 0.3s ease;
+            --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.6);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.8);
+            --radius-md: 15px;
+            --radius-lg: 20px;
+            --radius-xl: 50px;
+        }
+
+        /* ==================== GLOBAL STYLES ==================== */
+        body {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-mid) 50%, var(--primary-light) 100%);
+            color: var(--text-light);
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(196, 30, 58, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        ::selection {
+            background: var(--accent-red);
+            color: var(--text-light);
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-mid);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-red);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-red-bright);
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(196, 30, 58, 0.5), 0 20px 60px rgba(0, 0, 0, 0.8);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(230, 57, 70, 0.8), 0 20px 60px rgba(0, 0, 0, 0.8);
+            }
+        }
+
+        @keyframes heartFall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ==================== LAYOUT ==================== */
+        .main-container {
+            min-height: 100vh;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 var(--spacing-lg);
+        }
+
+        /* ==================== HEADER ==================== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-2xl) 0;
+            border-bottom: 1px solid rgba(196, 30, 58, 0.3);
+            margin-bottom: var(--spacing-2xl);
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            font-size: 40px;
+            animation: pulse 2s infinite;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-red-bright), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu ul {
+            display: flex;
+            gap: var(--spacing-2xl);
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-red-bright);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--accent-red-bright);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: var(--spacing-2xl);
+            padding: var(--spacing-3xl) 0;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero-content {
+            z-index: 3;
+        }
+
+        .hero-title {
+            font-size: 64px;
+            font-weight: 800;
+            margin-bottom: var(--spacing-lg);
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--accent-red-bright), var(--gold), var(--accent-red-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-gray);
+            margin-bottom: var(--spacing-2xl);
+            font-style: italic;
+            animation: fadeIn 1s ease-out;
+            font-weight: 300;
+        }
+
+        /* ==================== BUTTONS ==================== */
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-lg);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-2xl);
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            padding: 18px 45px;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: var(--radius-xl);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.6s ease;
+            z-index: 0;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-text, .btn-icon {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-red-bright));
+            color: white;
+            box-shadow: var(--shadow-lg);
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 50px rgba(230, 57, 70, 1), var(--shadow-lg);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(196, 30, 58, 0.3);
+            color: var(--accent-red-bright);
+            border: 2px solid var(--accent-red-bright);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(196, 30, 58, 0.6);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ==================== MESSAGE DISPLAY ==================== */
+        .message-display {
+            min-height: 150px;
+            background: rgba(45, 17, 21, 0.8);
+            border: 2px solid var(--accent-red);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin: var(--spacing-lg) 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: var(--spacing-lg);
+            backdrop-filter: blur(10px);
+            box-shadow: inset 0 0 30px rgba(196, 30, 58, 0.2), var(--shadow-md);
+            animation: fadeIn 1.4s ease-out;
+        }
+
+        .message-content {
+            font-size: 24px;
+            color: var(--text-light);
+            font-style: italic;
+            font-weight: 600;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.8;
+            word-wrap: break-word;
+        }
+
+        .btn-edit {
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-xl);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: var(--transition);
+            align-self: flex-end;
+        }
+
+        .btn-edit:hover {
+            background: var(--accent-red-bright);
+            transform: scale(1.05);
+        }
+
+        /* ==================== FEATURES ==================== */
+        .features {
+            padding: var(--spacing-3xl) 0;
+            margin-top: var(--spacing-3xl);
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: var(--spacing-3xl);
+            background: linear-gradient(135deg, var(--accent-red-bright), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .feature-card {
+            background: rgba(61, 21, 32, 0.6);
+            border: 1px solid rgba(196, 30, 58, 0.5);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-xl);
+            text-align: center;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            background: rgba(61, 21, 32, 0.9);
+            border-color: var(--accent-red-bright);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(196, 30, 58, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 50px;
+            margin-bottom: var(--spacing-lg);
+            animation: pulse 2s infinite;
+        }
+
+        .feature-card h4 {
+            font-size: 22px;
+            margin-bottom: var(--spacing-md);
+            color: var(--accent-red-bright);
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* ==================== CHATBOT WIDGET ==================== */
+        .chatbot-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 380px;
+            height: 500px;
+            background: rgba(45, 17, 21, 0.95);
+            border: 2px solid var(--accent-red);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transform: translateX(450px);
+            transition: transform 0.4s ease;
+            overflow: hidden;
+        }
+
+        .chatbot-widget.active {
+            transform: translateX(0);
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-red-bright));
+            padding: var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-red-bright);
+        }
+
+        .chatbot-header h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .close-chatbot {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-chatbot:hover {
+            transform: rotate(90deg);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .chat-message {
+            background: rgba(196, 30, 58, 0.2);
+            border-left: 3px solid var(--accent-red-bright);
+            padding: var(--spacing-md);
+            border-radius: 8px;
+            font-size: 16px;
+            line-height: 1.5;
+            animation: slideInRight 0.4s ease-out;
+            word-wrap: break-word;
+        }
+
+        .chatbot-actions {
+            border-top: 1px solid rgba(196, 30, 58, 0.3);
+            padding: var(--spacing-lg);
+            display: flex;
+            gap: var(--spacing-sm);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-reaction {
+            background: rgba(196, 30, 58, 0.3);
+            border: 1px solid var(--accent-red);
+            color: var(--text-light);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-xl);
+            cursor: pointer;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .btn-reaction:hover {
+            background: var(--accent-red);
+            transform: scale(1.2);
+        }
+
+        /* ==================== MODAL ==================== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background: var(--primary-mid);
+            border: 2px solid var(--accent-red);
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-red-bright));
+            padding: var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-red-bright);
+        }
+
+        .modal-header h4 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 0;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: var(--spacing-xl);
+            position: relative;
+        }
+
+        .message-textarea {
+            width: 100%;
+            height: 200px;
+            background: rgba(45, 17, 21, 0.8);
+            border: 2px solid var(--accent-red);
+            border-radius: 8px;
+            color: var(--text-light);
+            padding: var(--spacing-md);
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 16px;
+            resize: none;
+            transition: var(--transition);
+        }
+
+        .message-textarea:focus {
+            outline: none;
+            border-color: var(--accent-red-bright);
+            box-shadow: 0 0 20px rgba(196, 30, 58, 0.5);
+        }
+
+        .char-count {
+            font-size: 12px;
+            color: var(--text-gray);
+            margin-top: var(--spacing-sm);
+            display: block;
+        }
+
+        .modal-footer {
+            padding: var(--spacing-lg) var(--spacing-xl);
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: flex-end;
+            border-top: 1px solid rgba(196, 30, 58, 0.3);
+        }
+
+        /* ==================== DECORATIVE ==================== */
+        .decorative-elements {
+            position: relative;
+            height: 200px;
+            margin-top: var(--spacing-2xl);
+        }
+
+        .rose-decoration {
+            position: absolute;
+            font-size: 80px;
+            opacity: 0.3;
+            animation: pulse 3s infinite;
+        }
+
+        .rose-decoration.left {
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .rose-decoration.right {
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        /* ==================== HEARTS ==================== */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .falling-heart {
+            position: fixed;
+            font-size: 40px;
+            animation: heartFall linear forwards;
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px rgba(230, 57, 70, 0.8));
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            border-top: 1px solid rgba(196, 30, 58, 0.3);
+            padding: var(--spacing-2xl) 0;
+            text-align: center;
+            margin-top: var(--spacing-3xl);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-content p {
+            color: var(--text-gray);
+            margin-bottom: var(--spacing-lg);
+            font-size: 16px;
+        }
+
+        .footer-content a {
+            color: var(--accent-red-bright);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--spacing-lg);
+            justify-content: center;
+        }
+
+        .social-icon {
+            font-size: 30px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.3) rotate(10deg);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 48px; }
+            .hero-subtitle { font-size: 18px; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 280px; }
+            .nav-menu ul { gap: var(--spacing-lg); }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .header { flex-direction: column; gap: var(--spacing-lg); margin-bottom: var(--spacing-lg); }
+            .nav-menu ul { flex-direction: column; gap: var(--spacing-sm); text-align: center; }
+            .hero-title { font-size: 36px; }
+            .hero-subtitle { font-size: 16px; }
+            .section-title { font-size: 32px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .chatbot-widget { width: 90%; bottom: var(--spacing-lg); right: var(--spacing-lg); height: 450px; }
+            .rose-decoration { font-size: 60px; }
+        }
+
+        @media (max-width: 480px) {
+            .content-wrapper { padding: 0 var(--spacing-md); }
+            .logo-text { font-size: 20px; }
+            .logo-icon { font-size: 30px; }
+            .hero-title { font-size: 28px; }
+            .hero-subtitle { font-size: 14px; }
+            .btn { padding: 14px 30px; font-size: 16px; width: 100%; max-width: 250px; }
+            .cta-buttons { gap: var(--spacing-md); }
+            .message-display { margin: var(--spacing-lg) 0; min-height: 100px; padding: var(--spacing-md); }
+            .feature-icon { font-size: 40px; }
+            .feature-card h4 { font-size: 18px; }
+            .feature-card p { font-size: 14px; }
+            .chatbot-widget { width: 95%; height: 400px; bottom: var(--spacing-sm); right: var(--spacing-sm); }
+            .modal-content { width: 95%; }
+            .message-textarea { height: 150px; font-size: 14px; }
+            .rose-decoration { font-size: 40px; }
+            .footer-content { font-size: 14px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="title">💕 Momentos Românticos 💕</div>
-        <div class="subtitle">Clique no botão e deixe a magia acontecer...</div>
-        <button id="clickButton">Clique-me</button>
-        <div class="romantic-text" id="romanticText"></div>
+    <!-- Background Effects -->
+    <div class="background-container">
+        <div class="gradient-bg"></div>
     </div>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <div class="content-wrapper">
+            <!-- Header -->
+            <header class="header">
+                <div class="logo">
+                    <span class="logo-icon">💕</span>
+                    <h1 class="logo-text">Momentos Românticos</h1>
+                </div>
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="#home" class="nav-link">Início</a></li>
+                        <li><a href="#about" class="nav-link">Sobre</a></li>
+                        <li><a href="#contact" class="nav-link">Contato</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <!-- Hero Section -->
+            <section class="hero" id="home">
+                <div class="hero-content">
+                    <h2 class="hero-title">Deixe a Magia do Amor Acontecer</h2>
+                    <p class="hero-subtitle">Cada clique é um suspiro de amor, cada mensagem é uma batida do coração</p>
+                    
+                    <div class="cta-buttons">
+                        <button class="btn btn-primary" id="mainButton">
+                            <span class="btn-text">Clique-me</span>
+                            <span class="btn-icon">💕</span>
+                        </button>
+                        <button class="btn btn-secondary" id="toggleChatbot">
+                            <span class="btn-text">Chat Romântico</span>
+                            <span class="btn-icon">💬</span>
+                        </button>
+                    </div>
+
+                    <!-- Romantic Message Display -->
+                    <div class="message-display" id="messageDisplay">
+                        <div class="message-content" id="messageContent">Clique no botão acima para ver uma mensagem romântica 💕</div>
+                        <button class="btn-edit" id="editMessageBtn" style="display: none;">✏️ Editar</button>
+                    </div>
+                </div>
+
+                <!-- Decorative Elements -->
+                <div class="decorative-elements">
+                    <div class="rose-decoration left">🌹</div>
+                    <div class="rose-decoration right">🌹</div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features" id="about">
+                <h3 class="section-title">Nossas Funções</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">❤️</div>
+                        <h4>Chuva de Corações</h4>
+                        <p>Centenas de corações caindo em uma animação mágica</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h4>Chatbot Romântico</h4>
+                        <p>Mensagens automáticas para te surpreender</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">✨</div>
+                        <h4>Personalizáveis</h4>
+                        <p>Edite todas as mensagens românticas</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h4>Design Luxuoso</h4>
+                        <p>Tema escuro e vermelho brilhante</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <p>&copy; 2024 Momentos Românticos. Criado com ❤️ por <a href="https://github.com/PedroJVDV">PedroJVDV</a></p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon" title="Rosas">🌹</a>
+                        <a href="#" class="social-icon" title="Corações">💕</a>
+                        <a href="#" class="social-icon" title="Brilho">✨</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <!-- Chatbot Widget -->
+    <div class="chatbot-widget" id="chatbotWidget">
+        <div class="chatbot-header">
+            <h4>💕 Chat Romântico</h4>
+            <button class="close-chatbot" id="closeChatbot">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages"></div>
+        <div class="chatbot-actions">
+            <button class="btn-reaction" data-reaction="❤️">❤️</button>
+            <button class="btn-reaction" data-reaction="😍">😍</button>
+            <button class="btn-reaction" data-reaction="🥰">🥰</button>
+        </div>
+    </div>
+
+    <!-- Heart Rain Container -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- Modal for Message Editing -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Editar Mensagem Romântica</h4>
+                <button class="modal-close" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <textarea id="messageTextarea" class="message-textarea" placeholder="Digite sua mensagem romântica..." maxlength="500"></textarea>
+                <span class="char-count"><span id="charCount">0</span>/500</span>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelEditBtn">Cancelar</button>
+                <button class="btn btn-primary" id="saveEditBtn">Salvar</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        const messages = [
-            "Você é minha pessoa favorita do universo inteiro 💕",
-            "Cada momento ao seu lado é um presente do céu 🌹",
-            "Você faz meu coração bater de forma especial ❤️",
-            "Com voc��, descobri o verdadeiro significado do amor 💫",
-            "Você é a razão do meu sorriso todos os dias 😊💕",
-            "Sua presença ilumina meus dias mais sombrios ✨",
-            "Amo tudo em você, cada detalhe é perfeito 💖",
-            "Você é meu melhor presente 🎁",
-            "Meu coração é inteiramente seu 💗"
-        ];
-        const btn = document.getElementById('clickButton');
-        const text = document.getElementById('romanticText');
-        let isAnimating = false;
-        let isEditing = false;
-        function createHearts() {
-            if (isAnimating) return;
-            isAnimating = true;
-            const msg = messages[Math.floor(Math.random() * messages.length)];
-            text.textContent = msg;
-            text.classList.add('show');
-            for (let i = 0; i < 50; i++) {
-                setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.className = 'heart-emoji';
-                    heart.textContent = ['❤️', '💕', '💖', '💗', '💓'][Math.floor(Math.random() * 5)];
-                    const x = Math.random() * window.innerWidth;
-                    const duration = 2.5 + Math.random() * 1.5;
-                    heart.style.left = x + 'px';
-                    heart.style.top = '-80px';
-                    heart.style.animationDuration = duration + 's';
-                    document.body.appendChild(heart);
-                    setTimeout(() => heart.remove(), duration * 1000 + 200);
-                }, i * 50);
-            }
-            if (navigator.vibrate) navigator.vibrate([20, 30, 20]);
-            setTimeout(() => { isAnimating = false; }, 4000);
-        }
-        function editText() {
-            if (isEditing || !text.classList.contains('show')) return;
-            isEditing = true;
-            text.classList.add('editing');
-            text.contentEditable = true;
-            text.focus();
-            const range = document.createRange();
-            range.selectNodeContents(text);
-            const sel = window.getSelection();
-            sel.removeAllRanges();
-            sel.addRange(range);
-            function finish() {
-                text.contentEditable = false;
-                text.classList.remove('editing');
-                isEditing = false;
-            }
-            text.addEventListener('blur', finish, { once: true });
-            text.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    finish();
+        // ==================== CONFIG ====================
+        const CONFIG = {
+            chatbotInterval: 30000,
+            firstChatbotDelay: 5000,
+            heartCount: 100,
+            messages: [
+                "Você é minha pessoa favorita do universo inteiro 💕",
+                "Cada momento ao seu lado é um presente do céu 🌹",
+                "Você faz meu coração bater de forma especial ❤️",
+                "Com você, descobri o verdadeiro significado do amor 💫",
+                "Você é a razão do meu sorriso todos os dias 😊💕",
+                "Sua presença ilumina meus dias mais sombrios ✨",
+                "Amo tudo em você, cada detalhe é perfeito 💖",
+                "Você é meu melhor presente 🎁",
+                "Meu coração é inteiramente seu 💗"
+            ],
+            chatbotMessages: [
+                "Você sabia que você é incrível? 💫",
+                "A vida é mais bonita quando você está nela 🌹",
+                "Você merece toda felicidade do mundo 💕",
+                "Seu sorriso faz meu dia melhor ✨",
+                "Você é especial e importante 💖",
+                "O amor é o que torna a vida valer a pena ❤️",
+                "Você é um presente para o mundo 🎁",
+                "Cada dia com você é uma bênção 🙏",
+                "Você é perfeito do jeito que é 👑",
+                "Amo ser perto de você 💕"
+            ],
+            heartEmojis: ['❤️', '💕', '💖', '💗', '💓', '💞', '💘', '💝']
+        };
+
+        // ==================== UTILS ====================
+        const Utils = {
+            getRandomItem: (arr) => arr[Math.floor(Math.random() * arr.length)],
+            getRandomNumber: (min, max) => Math.random() * (max - min) + min,
+            addClass: (el, cls) => { if (el) el.classList.add(cls); },
+            removeClass: (el, cls) => { if (el) el.classList.remove(cls); },
+            toggleClass: (el, cls) => { if (el) el.classList.toggle(cls); },
+            hasClass: (el, cls) => el && el.classList.contains(cls),
+            getElementById: (id) => document.getElementById(id),
+            on: (el, event, callback) => { if (el) el.addEventListener(event, callback); },
+            vibrate: (pattern = [20, 30, 20]) => { if (navigator.vibrate) navigator.vibrate(pattern); }
+        };
+
+        // ==================== HEARTS ====================
+        const Hearts = {
+            container: null,
+            init: function() {
+                this.container = Utils.getElementById('heartsContainer');
+            },
+            create: function() {
+                if (!this.container) this.init();
+                this.container.innerHTML = '';
+                
+                for (let i = 0; i < CONFIG.heartCount; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.className = 'falling-heart';
+                        heart.textContent = Utils.getRandomItem(CONFIG.heartEmojis);
+                        
+                        const startX = Math.random() * window.innerWidth;
+                        const duration = Utils.getRandomNumber(2.5, 4);
+                        const delay = Math.random() * 0.5;
+                        
+                        heart.style.left = startX + 'px';
+                        heart.style.top = '-80px';
+                        heart.style.animationDuration = duration + 's';
+                        heart.style.animationDelay = delay + 's';
+                        
+                        this.container.appendChild(heart);
+                        
+                        setTimeout(() => heart.remove(), (duration + delay) * 1000 + 200);
+                    }, i * 50);
                 }
-            }, { once: true });
+                
+                Utils.vibrate();
+            }
+        };
+
+        // ==================== MESSAGES ====================
+        const Messages = {
+            contentEl: null,
+            editBtnEl: null,
+            
+            init: function() {
+                this.contentEl = Utils.getElementById('messageContent');
+                this.editBtnEl = Utils.getElementById('editMessageBtn');
+            },
+            
+            getCurrentMessage: function() {
+                if (!this.contentEl) this.init();
+                return this.contentEl.textContent;
+            },
+            
+            setMessage: function(message) {
+                if (!this.contentEl) this.init();
+                this.contentEl.textContent = message;
+                this.contentEl.style.animation = 'none';
+                setTimeout(() => {
+                    this.contentEl.style.animation = 'fadeIn 0.6s ease-out';
+                }, 10);
+            },
+            
+            showRandom: function() {
+                const randomMessage = Utils.getRandomItem(CONFIG.messages);
+                this.setMessage(randomMessage);
+                if (this.editBtnEl) this.editBtnEl.style.display = 'block';
+                Hearts.create();
+            }
+        };
+
+        // ==================== CHATBOT ====================
+        const Chatbot = {
+            isActive: false,
+            chatbotInterval: null,
+            widget: null,
+            messagesContainer: null,
+            
+            init: function() {
+                this.widget = Utils.getElementById('chatbotWidget');
+                this.messagesContainer = Utils.getElementById('chatbotMessages');
+            },
+            
+            toggle: function() {
+                if (!this.widget) this.init();
+                Utils.toggleClass(this.widget, 'active');
+                this.isActive = !this.isActive;
+                if (this.isActive) {
+                    this.addMessage(Utils.getRandomItem(CONFIG.chatbotMessages));
+                }
+            },
+            
+            addMessage: function(message) {
+                if (!this.messagesContainer) this.init();
+                const messageEl = document.createElement('div');
+                messageEl.className = 'chat-message';
+                messageEl.textContent = message;
+                this.messagesContainer.appendChild(messageEl);
+                this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+            },
+            
+            startAutoMessages: function() {
+                setTimeout(() => {
+                    this.addMessage(Utils.getRandomItem(CONFIG.chatbotMessages));
+                }, CONFIG.firstChatbotDelay);
+                
+                this.chatbotInterval = setInterval(() => {
+                    this.addMessage(Utils.getRandomItem(CONFIG.chatbotMessages));
+                }, CONFIG.chatbotInterval);
+            }
+        };
+
+        // ==================== MODAL ====================
+        const Modal = {
+            modal: null,
+            textarea: null,
+            charCount: null,
+            
+            init: function() {
+                this.modal = Utils.getElementById('editModal');
+                this.textarea = Utils.getElementById('messageTextarea');
+                this.charCount = Utils.getElementById('charCount');
+            },
+            
+            open: function(currentMessage = '') {
+                if (!this.modal) this.init();
+                Utils.addClass(this.modal, 'active');
+                this.textarea.value = currentMessage;
+                this.textarea.focus();
+                this.updateCharCount();
+            },
+            
+            close: function() {
+                if (!this.modal) this.init();
+                Utils.removeClass(this.modal, 'active');
+            },
+            
+            save: function() {
+                const newMessage = this.textarea.value.trim();
+                if (newMessage) {
+                    this.close();
+                    return newMessage;
+                }
+                return null;
+            },
+            
+            updateCharCount: function() {
+                if (this.charCount && this.textarea) {
+                    this.charCount.textContent = this.textarea.value.length;
+                }
+            }
+        };
+
+        // ==================== INTERACTIONS ====================
+        function setupInteractions() {
+            Hearts.init();
+            Messages.init();
+            Chatbot.init();
+            Modal.init();
+
+            // Main button
+            Utils.on(Utils.getElementById('mainButton'), 'click', () => {
+                Messages.showRandom();
+            });
+
+            // Toggle chatbot
+            Utils.on(Utils.getElementById('toggleChatbot'), 'click', () => {
+                Chatbot.toggle();
+            });
+
+            Utils.on(Utils.getElementById('closeChatbot'), 'click', () => {
+                Chatbot.toggle();
+            });
+
+            // Edit message
+            Utils.on(Utils.getElementById('editMessageBtn'), 'click', () => {
+                Modal.open(Messages.getCurrentMessage());
+            });
+
+            // Modal buttons
+            Utils.on(Utils.getElementById('closeModalBtn'), 'click', () => {
+                Modal.close();
+            });
+
+            Utils.on(Utils.getElementById('cancelEditBtn'), 'click', () => {
+                Modal.close();
+            });
+
+            Utils.on(Utils.getElementById('saveEditBtn'), 'click', () => {
+                const newMessage = Modal.save();
+                if (newMessage) {
+                    Messages.setMessage(newMessage);
+                }
+            });
+
+            // Textarea
+            Utils.on(Utils.getElementById('messageTextarea'), 'input', () => {
+                Modal.updateCharCount();
+            });
+
+            // Reactions
+            document.querySelectorAll('.btn-reaction').forEach(btn => {
+                Utils.on(btn, 'click', function() {
+                    alert(`Você reagiu com ${this.dataset.reaction}!`);
+                });
+            });
+
+            // Keyboard shortcuts
+            Utils.on(document, 'keydown', (e) => {
+                if (e.key === 'Escape') {
+                    Modal.close();
+                    if (Chatbot.isActive) Chatbot.toggle();
+                }
+            });
         }
-        btn.addEventListener('click', createHearts);
-        text.addEventListener('click', editText);
-        text.addEventListener('dblclick', editText);
+
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            setupInteractions();
+            Chatbot.startAutoMessages();
+            setTimeout(() => {
+                Messages.showRandom();
+            }, 500);
+        });
     </script>
 </body>
 </html>
